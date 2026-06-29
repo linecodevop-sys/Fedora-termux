@@ -1,12 +1,22 @@
 <div align="center">
 
 ```
-  ███████╗███████╗██████╗  ██████╗ ██████╗  █████╗ 
-  ██╔════╝██╔════╝██╔══██╗██╔═══██╗██╔══██╗██╔══██╗
-  █████╗  █████╗  ██║  ██║██║   ██║██████╔╝███████║
-  ██╔══╝  ██╔══╝  ██║  ██║██║   ██║██╔══██╗██╔══██║
-  ██║     ███████╗██████╔╝╚██████╔╝██║  ██║██║  ██║
-  ╚═╝     ╚══════╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+         .:;+X$XX$X+;:.         
+      :+X$XX$$$$$$$XX$X+:       
+    ;X$XX$$$$$$$$$$$$$XX$X;     
+  .X$$X$$$$$$$$$$$$$$$$$XX$X.   
+  X$$$X$$$$$$$$$$$$$$$$$$XX$$   
+ X$$$$X$$$$$$XX+;;+X$$$$$XX$$$  
+ $$$$$X$$$$$X;       ;X$$$$X$$$ 
+ $$$$$X$$$$X.    ..   .X$$$X$$$ 
+ $$$$$X$$$$:  .X$$$$X.  $$$X$$$ 
+ X$$$$X$$$X  X$$$$$$$$  X$$X$$X 
+  X$$$X$$$X  X$$$$$$$$  X$XX$$X 
+  .$$$$X$$$X  .X$$$$X.  $$$X$X. 
+    ;$$$X$$$X.   ..   .X$$$X+   
+      +$$$X$$$$X;;;X$$$$X$+     
+        :+X$$X$$$$$$$XX+:       
+            .;+XXXXX+;.         
 ```
 
 **Fedora Dev Environment Setup for Termux**  
@@ -18,9 +28,8 @@
 [![Issues](https://img.shields.io/github/issues/linecodevop-sys/Fedora-termux?style=for-the-badge&color=red)](https://github.com/linecodevop-sys/Fedora-termux/issues)
 
 ![Fedora](https://img.shields.io/badge/Fedora-51A2DA?style=flat-square&logo=fedora&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js_22-339933?style=flat-square&logo=node.js&logoColor=white)
-![Bun](https://img.shields.io/badge/Bun-000000?style=flat-square&logo=bun&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Python](https://img.shields.io/badge/Python_3.11-3776AB?style=flat-square&logo=python&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js&logoColor=white)
 ![Android](https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white)
 
 </div>
@@ -31,23 +40,17 @@
 
 | Category | Tools |
 |---|---|
-| **Shell** | Bash with colored prompt, aliases, history |
+| **Shell** | Bash with colored prompt, aliases, history, fastfetch on startup |
 | **Base Tools** | curl, nano, git, gh, tree, zip, wget, tar, ripgrep, fastfetch |
-| **Compiler** | gcc, g++, make, cmake, python3 |
-| **Runtime** | Node.js 22 LTS, Bun |
-| **TypeScript** | typescript, tsx, ts-node |
-| **Linting** | eslint, prettier |
-| **Dev Tools** | nodemon, pm2, concurrently, cross-env, dotenv-cli |
-| **Frameworks** | @nestjs/cli, vite, http-server |
-| **Package Managers** | npm, pnpm, yarn |
-| **Database** | prisma |
+| **Compiler** | gcc, g++, make, cmake |
+| **Python** | Python 3.11 (default), pip (full), python3.11-devel |
+| **Runtime** | Node.js (latest via dnf) |
 
 ---
 
 ## 📋 Requirements
 
-- Android device with [Termux](https://github.com/termux/termux-app) installed (from F-Droid, not Play Store)
-- [proot-distro](https://github.com/termux/proot-distro) v5.0+
+- Android device with [Termux](https://github.com/termux/termux-app) installed (dari F-Droid, bukan Play Store)
 - ~2GB free storage
 - Internet connection
 
@@ -55,47 +58,35 @@
 
 ## 🚀 Installation
 
-### Step 1 — Install proot-distro in Termux
+### Langkah 1 — Setup Termux (cukup sekali)
+
+Jalankan ini saat pertama kali buka Termux:
 
 ```bash
-pkg update && pkg upgrade -y
-pkg install proot-distro -y
+curl -fsSL https://raw.githubusercontent.com/linecodevop-sys/Fedora-termux/main/termux-init.sh | bash
 ```
 
-### Step 2 — Install Fedora
+Script ini otomatis:
+- `pkg update && pkg upgrade`
+- Install `proot-distro`
+- Install Fedora (kalau belum ada)
+- Tambah alias `fedora` ke `~/.bashrc`
 
-```bash
-proot-distro install fedora:latest --name fedora
-```
-
-### Step 3 — Add alias (optional but recommended)
-
-```bash
-echo "alias fedora='proot-distro login fedora'" >> ~/.bashrc && source ~/.bashrc
-```
-
-### Step 4 — Enter Fedora & run setup
+### Langkah 2 — Masuk Fedora & jalankan setup
 
 ```bash
 fedora
-```
-
-Then inside Fedora, run via curl (one-liner):
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/linecodevop-sys/Fedora-termux/main/setup.sh | bash
-```
-
-Or clone and run manually:
-
-```bash
-git clone https://github.com/linecodevop-sys/Fedora-termux.git
-cd Fedora-termux
-chmod +x setup.sh
 bash setup.sh
 ```
 
-### Step 5 — Apply shell changes
+Atau langsung via curl dari dalam Fedora:
+
+```bash
+fedora
+curl -fsSL https://raw.githubusercontent.com/linecodevop-sys/Fedora-termux/main/setup.sh | bash
+```
+
+### Langkah 3 — Apply shell
 
 ```bash
 source ~/.bashrc
@@ -103,21 +94,25 @@ source ~/.bashrc
 
 ---
 
-## 🎬 What happens when you run it
+## 🎬 Tampilan saat dijalankan
 
 ```
-  ███████╗███████╗██████╗  ██████╗ ...
-  
-  ▶ [1/6] Updating system packages
-  ─────────────────────────────────────────────
+         .:;+X$XX$X+;:.         
+      :+X$XX$$$$$$$XX$X+:       
+    ...  (Fedora logo)  ...      
+
+  Fedora Dev Environment · Termux proot-distro
+
+  ▶ [1/5] Updating system packages
+  ─────────────────────────────────────────
   ✔  System up to date
 
-  ▶ [2/6] Installing base tools
-  ─────────────────────────────────────────────
-  [████████████████████░░░░░░░░░░░░░░░░░░░░] 51% Installing tools...
+  ▶ [2/5] Installing base tools
+  ⠸  Installing base tools
+  ✔  Base tools installed
 
-  ▶ [3/6] Installing Node.js 22 LTS
-  ...
+  ▶ [3/5] Installing Python 3.11
+  ✔  Python 3.11.x installed & set as default
 
   ✅  Setup complete!
 ```
@@ -128,9 +123,10 @@ source ~/.bashrc
 
 ```
 Fedora-termux/
-├── setup.sh        # Main setup script
+├── termux-init.sh  # Jalankan sekali di Termux (update + install proot + Fedora)
+├── setup.sh        # Jalankan di dalam Fedora
 ├── README.md       # This file
-└── LICENSE         # MIT License
+└── LICENSE         # Apache 2.0
 ```
 
 ---
@@ -139,19 +135,20 @@ Fedora-termux/
 
 | Version | Date | Notes |
 |---|---|---|
+| [v2.0.0](https://github.com/linecodevop-sys/Fedora-termux/releases) | 2026-06-29 | Refactor: Fedora logo banner, Python 3.11, termux-init.sh |
 | [v1.0.0](https://github.com/linecodevop-sys/Fedora-termux/releases/tag/v1.0.0) | 2026-06-28 | Initial release |
 
 ---
 
 ## 🤝 Contributing
 
-Pull requests are welcome! If you find a bug or want to add a tool, open an issue first.
+Pull requests are welcome! Kalau nemu bug atau mau tambah tool, open issue dulu.
 
 ---
 
 ## 📄 License
 
-MIT © [linecodevop-sys](https://github.com/linecodevop-sys)
+Apache 2.0 © [linecodevop-sys](https://github.com/linecodevop-sys)
 
 ---
 
